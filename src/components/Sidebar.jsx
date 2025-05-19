@@ -1,4 +1,5 @@
 const Sidebar = ({ open, setOpen }) => {
+  // we could use a library for icons, but this is more about doing code than making this UI beautiful now
   const navigationItems = [
     { name: "Dashboard", icon: "🏠" },
     { name: "Users", icon: "👥" },

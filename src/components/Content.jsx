@@ -2,6 +2,7 @@ import UserCard from "./UserCard";
 import StatCard from "./StatCard";
 import SimpleChart from "./SimpleChart";
 import TogglePanel from "./TogglePanel";
+
 const Content = () => {
   const users = [
     {
