@@ -1,10 +1,10 @@
 const Sidebar = ({ open, setOpen }) => {
   // we could use a library for icons, but this is more about doing code than making this UI beautiful now
   const navigationItems = [
-    { name: "Dashboard", icon: "🏠" },
-    { name: "Users", icon: "👥" },
-    { name: "Analytics", icon: "📊" },
-    { name: "Settings", icon: "⚙️" },
+    { name: "Dashboard", icon: "🏠", path: "/" },
+    { name: "Users", icon: "👥", path: "/users" },
+    { name: "Analytics", icon: "📊", path: "/analytics" },
+    { name: "Settings", icon: "⚙️", path: "/settings" },
   ];
 
   return (
@@ -40,7 +40,7 @@ const Sidebar = ({ open, setOpen }) => {
             {navigationItems.map((item) => (
               <li key={item.name} className="mb-2">
                 <a
-                  href="#"
+                  href={item.path}
                   className="flex items-center px-4 py-2 text-gray-300 rounded-md hover:bg-gray-700"
                 >
                   <span className="mr-3">{item.icon}</span>
