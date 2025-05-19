@@ -3,7 +3,7 @@ import StatCard from "./StatCard";
 import SimpleChart from "./SimpleChart";
 import TogglePanel from "./TogglePanel";
 
-const Content = () => {
+const Dashboard = () => {
   const users = [
     {
       id: 1,
@@ -112,4 +112,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Dashboard;
