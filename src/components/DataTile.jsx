@@ -4,10 +4,11 @@ const DataTile = ({ title, endpoint, id }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
 
-  const shouldFailRequest = useCallback(() => {
+  const shouldFailRequest = () => {
     return Math.random() < 0.5;
-  }, [id]);
+  };
 
   const fetchData = useCallback(async () => {
     try {
@@ -23,30 +24,33 @@ const DataTile = ({ title, endpoint, id }) => {
       const data = await response.json();
       setData(data);
       setError(null);
+      setRetryCount(0);
     } catch (err) {
       setError(err.message || "Failed to fetch data");
     } finally {
       setLoading(false);
     }
-  }, [endpoint, shouldFailRequest]);
+  }, [endpoint]);
 
   const handleRetry = () => {
+    setRetryCount((prevCount) => prevCount + 1);
+    if (retryCount > 3) {
+      setError("Failed to fetch data after 3 retries");
+      return;
+    }
     setLoading(true);
     setError(null);
     fetchData();
   };
 
   const handleRetryClick = (e) => {
-    // Stop the event from bubbling up to parent elements
     e.stopPropagation();
-
-    // Call your retry logic
     handleRetry();
   };
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 5000); // 30 seconds
+    const interval = setInterval(fetchData, 30000); // 30 seconds
     return () => clearInterval(interval); // cleanup interval on unmount
   }, [fetchData]);
 
